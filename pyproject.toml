@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "fast_api"
+version = "0.1.0"
+description = ""
+authors = ["Dominik Kozaczko <dominik@kozaczko.info>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+sanic = "^19.12.2"
+pony = "^0.7.13"
+psycopg2-binary = "^2.8.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.4"
+pre-commit = "^2.2.0"
+ipdb = "^0.13.2"
+black = "^19.10b0"
+requests = "^2.23.0"
+pytest-sanic = "^1.6.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py36']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.cache
+    | \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.pytest_cache
+    | \.tox
+    | \.venv
+    | __pycache__
+    | _build
+    | buck-out
+    | build
+    | dist
+    | docs
+    | migrations
+  )/
+
+)
+'''
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = false
+line_length = 88
+known_first_party = ["fast_api"]
+known_third_party = ["pony", "sanic"]
+
+# [tool.pytest]
+# not yet supported
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
