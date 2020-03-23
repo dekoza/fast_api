@@ -1,7 +1,7 @@
 import json
 import uuid
 
-from pony.orm import db_session, count, select
+from pony.orm import count, db_session, select
 
 from fast_api.main import app
 from fast_api.models import Cart, Item
@@ -37,10 +37,14 @@ def test_endpoint_with_cookie():
     with db_session():
         cart_id = str(uuid.uuid4())
         cart = Cart(id=cart_id)
-        cart_item = Item(cart=cart, external_id=str(uuid.uuid4()), value=1, name="Initial")
+        cart_item = Item(
+            cart=cart, external_id=str(uuid.uuid4()), value=1, name="Initial"
+        )
 
     payload = {"external_id": cart_item.external_id, "value": 100, "name": "Changed"}
-    request, response = app.test_client.post("/item", data=json.dumps(payload), cookies={"cart_id": cart_id})
+    request, response = app.test_client.post(
+        "/item", data=json.dumps(payload), cookies={"cart_id": cart_id}
+    )
 
     assert response.status_code == 204
 
@@ -49,6 +53,3 @@ def test_endpoint_with_cookie():
         assert len(cart.items) == 1
         db_item = cart.items.copy().pop()
         assert db_item.external_id == cart_item.external_id
-
-
-

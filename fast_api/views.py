@@ -1,7 +1,7 @@
 import uuid
 
-from pony.orm import db_session, commit
-from sanic.response import json, empty
+from pony.orm import commit, db_session
+from sanic.response import empty, json
 
 from fast_api.models import Cart, Item
 
