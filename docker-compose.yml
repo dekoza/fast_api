@@ -1,8 +1,14 @@
 version: "2"
 services:
   postgres:
-    env_file:
-      - ./.env
+    env_file: ./.env
     image: postgres:latest
     ports:
     - 5432:5432
+  sanic:
+    env_file: ./.env
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 8888:8888

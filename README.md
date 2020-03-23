@@ -1,56 +1,67 @@
 # Welcome to FastAPI
 
-This project is a simple example how to write
-fast RESTful APIs using Sanic and PonyORM.
+Not to be confused with [FastAPI framework](https://fastapi.tiangolo.com/)!
+
+This is a toy-project to showcase how to use Sanic and PonyORM together.
 
 ## Dependencies
 
 ### Sanic
 
-Sanic is one of the fastest microframeworks for Python.
+[Sanic](https://sanic.readthedocs.io/) is one of the fastest microframeworks for Python.
 It utilizes async/await syntax.
 
 ### PonyORM
 
-Pony is the most pythonic ORM. It translates generators and lambdas
-to optimized SQL. It still needs some features to be production-ready
-(e.g. migrations) but it's very convenient and fast.
+[Pony](https://ponyorm.org/) is the most pythonic ORM. It translates generators
+and lambdas to optimized SQL. It still needs some features to be production-ready
+(e.g. migrations) but it's very convenient and fast. Unfortunately it also
+doesn't support async/await syntax yet.
 
 ### Poetry
 
-Poetry is the smartest Python package and virtualenv manager.
+[Poetry](https://python-poetry.org/) is the smartest Python manager for packages
+and virtualenvs.
+
+## Development
+
+You'll need poetry:
+
+    pip install poetry
+    
+Then clone this repository and enter created directory. Inside it run:
+
+    poetry install
+    
+Poetry will create a virtualenv and install all dependencies.
+Now you can activate the virtualenv:
+
+    poetry shell
+    
+Please refer to [Poetry documentation](https://python-poetry.org/docs/)
+for further reading.
 
 ## Running
 
-Make sure you have poetry installed:
+Example project uses docker-compose.
 
-    pip install poetry
-
-Then clone this repo and run this in the directory:
-
-    poetry install
-
-It will install all the dependencies.
-
-Launch database:
-
-    docker-compose up
-
-Launch application:
-
-    poetry run python fast_api/main.py
+    docker-compose up --build
 
 The server should run on http://localhost:8888/
 
 ## Testing
 
-You need to have the db running:
+You'll need the Development set up as described above. 
+Start the database
 
-    docker-compose up
+    docker-compose up -d postgres
 
 Then you can run tests:
 
     poetry run pytest
 
+Remember to turn database off after testing:
+    
+    docker-compose down
 
 
