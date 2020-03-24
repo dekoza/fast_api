@@ -1,6 +1,19 @@
 from fastapi import FastAPI
 
-from demo.views import item
+from demo import views
+from demo.models import db
 
 app = FastAPI()
-app.add_api_route("/item", item, methods=["POST"])
+
+
+@app.on_event("startup")
+async def startup():
+    await db.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await db.disconnect()
+
+
+app.include_router(views.router)

@@ -47,7 +47,9 @@ Example project uses docker-compose.
 
     docker-compose up --build
 
-The server should run on http://localhost:8888/
+The server should run on http://localhost:8000/
+
+Automatic API documentation (swagger) is available at http://localhost:8000/docs
 
 ## Testing
 

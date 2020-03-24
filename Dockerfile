@@ -22,6 +22,3 @@ WORKDIR /srv
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8888
-
-ENTRYPOINT ["python3", "fast_api/main.py"]

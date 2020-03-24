@@ -8,17 +8,20 @@ from fastapi.testclient import TestClient
 from demo.main import app
 from demo.models import Cart, Item, db
 
-client = TestClient(app)
+
+@pytest.fixture(scope="module")
+def client():
+    yield TestClient(app)
 
 
-def test_endpoint_bad_paload():
+def test_endpoint_bad_paload(client):
     bad_payload = {"bad": "payload"}
     response = client.post("/item", data=json.dumps(bad_payload))
     assert response.status_code == 422
 
 
 @pytest.mark.asyncio
-async def test_endpoint_no_cookie():
+async def test_endpoint_no_cookie(client):
     item_id = str(uuid.uuid4())
 
     async with db:
@@ -41,7 +44,7 @@ async def test_endpoint_no_cookie():
 
 
 @pytest.mark.asyncio
-async def test_endpoint_with_cookie():
+async def test_endpoint_with_cookie(client):
     async with db:
         cart_id = str(uuid.uuid4())
         cart = await Cart.objects.create(id=cart_id)

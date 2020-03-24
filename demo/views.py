@@ -1,13 +1,16 @@
 import uuid
 
-from fastapi import Cookie, Response, status
+from fastapi import APIRouter, Cookie, Response, status
 from orm import NoMatch
 
 from demo.models import Cart as CartModel
 from demo.models import Item as ItemModel
 from demo.serializers import Item
 
+router = APIRouter()
 
+
+@router.post("/item")
 async def item(item: Item, response: Response, cart_id: str = Cookie(None)):
     if not cart_id:
         cart_id = str(uuid.uuid4())

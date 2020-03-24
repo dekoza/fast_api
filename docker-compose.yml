@@ -7,8 +7,9 @@ services:
     - 5432:5432
   sanic:
     env_file: ./.env
+    command: uvicorn demo.main:app --host 0.0.0.0
     build: .
     depends_on:
       - postgres
     ports:
-      - 8888:8888
+      - 8000:8000
