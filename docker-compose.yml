@@ -8,6 +8,7 @@ services:
   sanic:
     env_file: ./.env
     build: .
+    command: python3 fast_api/main.py
     depends_on:
       - postgres
     ports:
