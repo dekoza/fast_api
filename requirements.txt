@@ -17,4 +17,4 @@ sanic==19.12.2
 sniffio==1.1.0
 ujson==2.0.2; sys_platform != "win32" and implementation_name == "cpython"
 uvloop==0.14.0; sys_platform != "win32" and implementation_name == "cpython"
-websockets==8.1
+websockets==9.1
